@@ -1,0 +1,11 @@
+.Segment {
+    /*background-color: aquamarine;*/
+    color: rgb(219, 62, 149);
+    background-image: url("./assets/Worm_Head.png");
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    background-color: blueviolet;
+    width: 100px;
+    height: 100px;
+}
