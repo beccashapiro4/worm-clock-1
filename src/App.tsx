@@ -1,36 +1,40 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import './WormSegment'
 import WormSegment from './WormSegment'
 
 function App() {
-  const [count, setCount] = useState(0)
+  setInterval(updatetime, 1000);
+  const [wormPosition, setWormPosition] = useState({ x: 200, y: 200 });
+  const now = new Date().getHours(); // sets initial state
+  const min = new Date().getMinutes();
+  const sec = new Date().getSeconds();
+  const [hours, setHours] = useState(now);
+  const [minutes, setMinutes] = useState(min);
+  const [seconds, setSeconds] = useState(sec);
+
+  function updatetime() {
+    const newDate = new Date();
+    setHours(newDate.getHours());
+    setMinutes(newDate.getMinutes());
+    setSeconds(newDate.getSeconds());
+  }
+
+  const shiftWorm = (newPosition) => {
+    setWormPosition(newPosition);
+  }
 
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <WormSegment />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <WormSegment position={wormPosition} />
+        <button onClick={() => shiftWorm({ x: 500, y: 500 })}>
+          Move Child
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <h1>hours: {hours}</h1>
+        <h1>minutes: {minutes}</h1>
+        <h1>seconds: {seconds}</h1>
       </div>
-      <p className="read-the-docs">
-        I Am A Worm Clock
-      </p>
     </>
   )
 }

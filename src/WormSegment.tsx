@@ -3,15 +3,21 @@ import wormHead from './assets/Worm_Head.png'
 import './App.css'
 import './Worm.css'
 
-function WormSegment() {
-    const [position, setPosition] = useState({ x: 200, y: 500 })
+function WormSegment({ position }) {
+
     const wormStyle = {
         position: 'absolute',
         left: position.x,
         top: position.y,
     };
+
+    const shimmy = {
+        x: position.x + Math.sin(0.25) * 10,
+        y: position.y + Math.cos(0.25) * 10
+    }
+
     return (
-        <div className='Segment' style={wormStyle} onClick={() => setPosition({ x: 500, y: 200 })}> </div>
+        <div className='Segment' style={wormStyle}> </div>
     )
 }
 
