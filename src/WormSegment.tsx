@@ -4,9 +4,14 @@ import './App.css'
 import './Worm.css'
 
 function WormSegment() {
-    const [segmentCount, setSegmentCount] = useState(209)
+    const [position, setPosition] = useState({ x: 200, y: 500 })
+    const wormStyle = {
+        position: 'absolute',
+        left: position.x,
+        top: position.y,
+    };
     return (
-        <div className='Segment'> </div>
+        <div className='Segment' style={wormStyle} onClick={() => setPosition({ x: 500, y: 200 })}> </div>
     )
 }
 
