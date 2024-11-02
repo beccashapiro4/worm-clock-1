@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import './WormSegment'
 import WormSegment from './WormSegment.tsx'
+import Worm from './WormSegment.tsx'
 
 function CircularMotion(center, radius, i) {
   const angle = i * Math.PI * 2;
