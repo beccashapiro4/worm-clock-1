@@ -52,8 +52,17 @@ function Worm({ headPosition }) {
     );
     */
 
+    const another = { x: headPosition.x + 10, y: headPosition.y + 10 }
+    function test() {
+        var segments = [<WormSegment position={headPosition} />, <WormSegment position={another} />]
+        return segments
+    }
+
     return (
-        <WormSegment position={headPosition} />
+        <div>
+            <WormSegment position={headPosition} />
+            <WormSegment position={another} />
+        </div>
     )
 
 };
