@@ -16,8 +16,8 @@ function WormSegment({ position }) {
 }
 
 function Worm({ headPosition }) {
-    const length = 20;
-    const [segmentPositions, setSegmentPositions] = useState(Array<{ x: 500, y: 200 }>(20));
+    const length = 3;
+    const [segmentPositions, setSegmentPositions] = useState([{ x: 500, y: 200 }, { x: 300, y: 200 }, { x: 100, y: 200 }]);
 
     function moveSegments() {
         var i = 1;
@@ -52,7 +52,7 @@ function Worm({ headPosition }) {
     );
     */
 
-    const another = { x: headPosition.x + 10, y: headPosition.y + 10 }
+    const another = { x: headPosition.x + 50, y: headPosition.y + 50 }
     function test() {
         var segments = [<WormSegment position={headPosition} />, <WormSegment position={another} />]
         return segments
@@ -60,8 +60,7 @@ function Worm({ headPosition }) {
 
     return (
         <div>
-            <WormSegment position={headPosition} />
-            <WormSegment position={another} />
+            {test()}
         </div>
     )
 
