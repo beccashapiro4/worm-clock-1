@@ -26,41 +26,36 @@ function Worm({ headPosition }) {
         var newSegmentPositions = segmentPositions;
         while (i <= length) {
             newSegmentPositions[i] = segmentPositions[i - 1];
+            i++
         };
         setSegmentPositions(newSegmentPositions);
     };
 
     function getSegments() {
         var i = 0;
-        const segments = [];
+        var segments = [];
         while (i < length) {
-            segments[i] = (<WormSegment position={segmentPositions[i]} />);
+            segments.push(<WormSegment position={segmentPositions[i]} />);
+            i++
         };
-        return (
-            segments
-        );
+        return segments
     };
 
     /*
     moveSegments();
-
-    return (
-        <div>
-            {getSegments()}
-        </div>
-
-    );
     */
 
     const another = { x: headPosition.x + 50, y: headPosition.y + 50 }
     function test() {
-        var segments = [<WormSegment position={headPosition} />, <WormSegment position={another} />]
+        var segments = []
+        segments.push(<WormSegment position={headPosition} />)
+        segments.push(<WormSegment position={another} />)
         return segments
     }
 
     return (
         <div>
-            {test()}
+            {getSegments()}
         </div>
     )
 
