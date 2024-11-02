@@ -38,7 +38,7 @@ function App() {
   return (
     <>
       <div>
-        <WormSegment position={wormPosition} />
+        <Worm headPosition={wormPosition} />
         <div className='center' style={{ left: center.x, right: center.y }}></div>
         <h1>hours: {hours}</h1>
         <h1>minutes: {minutes}</h1>
