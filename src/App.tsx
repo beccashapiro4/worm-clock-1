@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import './WormSegment'
-import WormSegment from './WormSegment'
+import WormSegment from './WormSegment.tsx'
 
 function CircularMotion(center, radius, i) {
   const angle = i * Math.PI * 2;
@@ -17,7 +17,7 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const center = { x: 200, y: 200 };
+  const center = { x: 400, y: 400 };
   const radius = 200;
   const [index, setIndex] = useState(0);
 
@@ -31,10 +31,6 @@ function App() {
 
   function moveWormInACircle() {
     const newPosition = CircularMotion(center, radius, seconds / 60);
-    setWormPosition(newPosition);
-  }
-
-  const shiftWorm = (newPosition) => {
     setWormPosition(newPosition);
   }
 
