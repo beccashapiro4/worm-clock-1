@@ -12,21 +12,28 @@ function CircularMotion(center, radius, i) {
 }
 
 function App() {
-  let t = setTimeout(updatetime, 1000);
+  let t = setTimeout(updatetime, 100);
   const [wormPosition, setWormPosition] = useState({ x: 200, y: 200 });
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const center = { x: 400, y: 400 };
+  const minutesInADay = 12 * 60;
+  const secondsInAnHour = 60 * 60;
+
+  const center = { x: 700, y: 400 };
   const radius = 200;
   const [index, setIndex] = useState(0);
 
   function updatetime() {
     const newDate = new Date();
-    setHours(newDate.getHours() % 12);
-    setMinutes(newDate.getMinutes());
-    setSeconds(newDate.getSeconds());
+    const h = newDate.getHours() % 12
+    const m = newDate.getMinutes()
+    const s = newDate.getSeconds()
+    const ms = newDate.getMilliseconds()
+    setHours(h + m / 60);
+    setMinutes(m + s / 60);
+    setSeconds(s + ms / 1000);
     moveWormInACircle();
   }
 
