@@ -3,6 +3,17 @@ import wormHead from './assets/Worm_Head.png'
 import './App.css'
 import './Worm.css'
 
+function angleGivenIndex(i = 0) {
+    return i * Math.PI * 2;
+};
+
+function positionAroundCircle(center, radius, i) {
+    const angle = angleGivenIndex(i);
+    const x: number = center.x + radius * Math.cos(angle);
+    const y: number = center.y + radius * Math.sin(angle);
+    return ({ x, y });
+};
+
 function WormSegment({ position, angle = 0, id = 'body' }) {
 
     const wormStyle = {
@@ -16,67 +27,33 @@ function WormSegment({ position, angle = 0, id = 'body' }) {
     )
 }
 
-function Worm({ headPosition, angle = Math.PI * 0.7 }) {
-    const length = 100;
-    const [segmentPositions, setSegmentPositions] = useState([]);
+/* 
+index is a number from 0-1 that maps to an angle around the circle
+*/
+function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100 }) {
+    const headPosition = positionAroundCircle(center, radius, index);
+    const headAngle = angleGivenIndex(index);
 
-    function readableSegmentPositions() {
-        const Exes = segmentPositions.map((item) => {
-            return item.x.toPrecision(3).toString() + ','
-        });
-        const Wise = segmentPositions.map((item) => {
-            return item.y.toPrecision(3).toString() + ','
-        })
-
-        return (
-            <div>
-                <p> exes are: {Exes} </p>
-                <p> wise are: {Wise} </p>
-            </div>
-        )
-    }
-
-    function initializeSegmentPositions() {
-        while (segmentPositions.length < length) {
-            segmentPositions.push({ x: 300, y: 300 })
-        }
-    }
-
-    function moveSegments() {
-        var parentPosition = headPosition;
-        for (let i = 0; i < length; i++) {
-            let nextParent = segmentPositions[i];
-            segmentPositions[i] = parentPosition;
-            parentPosition = nextParent;
-        }
-    };
+    const length = 20;
 
     function getSegments() {
         var i = 1;
         var segments = [];
-        segments.push(<WormSegment position={headPosition} angle={angle} id='head' />)
+        var segmentIndex = index
+        segments.push(<WormSegment position={headPosition} angle={headAngle} id='head' />)
         while (i < length) {
-            segments.push(<WormSegment position={segmentPositions[i]} id='body' />);
+            segmentIndex = (segmentIndex - 0.01) % 1;
+            let pos = positionAroundCircle(center, radius, segmentIndex);
+            let a = (angleGivenIndex(segmentIndex) - Math.PI / 2) % (Math.PI * 2);
+            segments.push(<WormSegment position={pos} angle={a} id='body' />);
             i++
         };
         return segments
     };
 
-    initializeSegmentPositions();
-    moveSegments();
-
-    const another = { x: headPosition.x + 50, y: headPosition.y + 50 }
-    function test() {
-        var segments = []
-        segments.push(<WormSegment position={headPosition} />)
-        segments.push(<WormSegment position={another} />)
-        return segments
-    }
-
     return (
         <div>
             {getSegments()}
-            {readableSegmentPositions()}
         </div>
     )
 
