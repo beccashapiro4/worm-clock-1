@@ -3,6 +3,14 @@ import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
 
+/*
+TO-DO:
+- fix worm alignment
+- make clock's position "relative" to size & center of greater webpage
+- add "wiggle" to worm
+- add blinking worm eyes
+*/
+
 function App() {
   let t = setTimeout(updatetime, 100);
   const [hours, setHours] = useState(0);
@@ -35,22 +43,10 @@ function App() {
     setHIndex(hours / 60);
   }
 
-  function testUpdatetime() {
-    const newDate = new Date();
-    const h = newDate.getHours() % 12
-    const m = newDate.getMinutes()
-    const s = newDate.getSeconds()
-    const ms = newDate.getMilliseconds()
-    setHours(h + m / 60);
-    setMinutes(m + s / 60);
-    setSeconds(s + ms / 1000);
-    setSIndex(0);
-    setMIndex(0);
-  }
-
   return (
     <>
       <div>
+        <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
         <Worm index={sIndex} center={center} radius={sRadius} />
         <Worm index={mIndex} center={center} radius={mRadius} />
         <Worm index={hIndex} center={center} radius={hRadius} />

@@ -7,8 +7,17 @@
 
 .center {
   background-color: azure;
-  width: 20px;
-  height: 20px;
+  width: 5px;
+  height: 5px;
+  position: fixed;
+  border-radius: 50%;
+}
+
+.background-circle {
+  background-color: rgb(44, 44, 48);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
   position: fixed;
 }
 
