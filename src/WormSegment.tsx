@@ -60,7 +60,7 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100 }) {
             segments.push(<WormSegment position={pos} angle={a} hue={hue} id='body' />);
             i++
         };
-        return segments
+        return segments.reverse()
     };
 
     return (

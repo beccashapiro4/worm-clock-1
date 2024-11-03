@@ -5,10 +5,12 @@ import Worm from './WormSegment.tsx'
 
 /*
 TO-DO:
-- fix worm alignment
+- fix worm alignment (maybe done?)
 - make clock's position "relative" to size & center of greater webpage
 - add "wiggle" to worm
 - add blinking worm eyes
+- add cute little "squiggles" which appear & disappear
+- fix segments "overlapping in reverse"
 */
 
 function App() {
