@@ -30,6 +30,8 @@ function App() {
   const hRadius = 300;
   const [hIndex, setHIndex] = useState(0);
 
+  const [wiggleConstant, setWiggleConstant] = useState(0);
+
   function updatetime() {
     const newDate = new Date();
     const h = newDate.getHours() % 12
@@ -39,6 +41,7 @@ function App() {
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
+    setWiggleConstant((wiggleConstant + 1) % 40);
 
     setSIndex(seconds / 60);
     setMIndex(minutes / 60);
@@ -49,9 +52,9 @@ function App() {
     <>
       <div>
         <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
-        <Worm index={sIndex} center={center} radius={sRadius} />
-        <Worm index={mIndex} center={center} radius={mRadius} />
-        <Worm index={hIndex} center={center} radius={hRadius} />
+        <Worm index={sIndex} center={center} radius={sRadius} wiggleConstant={wiggleConstant} />
+        <Worm index={mIndex} center={center} radius={mRadius} wiggleConstant={wiggleConstant} />
+        <Worm index={hIndex} center={center} radius={hRadius} wiggleConstant={wiggleConstant} />
         <div className='center' style={{ left: center.x, top: center.y }}></div>
       </div>
     </>

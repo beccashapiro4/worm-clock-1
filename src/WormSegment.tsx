@@ -7,6 +7,13 @@ function angleGivenIndex(i = 0) {
     return i * Math.PI * 2 - (Math.PI / 2);
 };
 
+function effectiveRadiusForSegment(segmentNumber, radius) {
+    let positionInCycle = ((segmentNumber % 10) / 10) * Math.PI * 2;
+    let amplitude = 6;
+    let offset = amplitude * Math.sin(positionInCycle);
+    return radius + offset;
+}
+
 function positionAroundCircle(center, radius, i) {
     const angle = angleGivenIndex(i);
     const x: number = center.x - 20 + radius * Math.cos(angle);
@@ -41,31 +48,33 @@ function WormSegment({ position, angle = 0, hue = 120, id = 'body' }) {
 /* 
 index is a number from 0-1 that maps to an angle around the circle
 */
-function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100 }) {
-    const headPosition = positionAroundCircle(center, radius, index);
+function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleConstant = 0 }) {
     const headAngle = angleGivenIndex(index);
-
-    const length = 20;
+    const length = 40;
 
     function getSegments() {
         var i = 1;
         var segments = [];
         var segmentIndex = index
+        let headRadius = effectiveRadiusForSegment(wiggleConstant, radius);
+        let headPosition = positionAroundCircle(center, headRadius, index);
         let hue = hueGivenRadius(radius);
         segments.push(<WormSegment position={headPosition} angle={headAngle} hue={hue} id='head' />)
         while (i < length) {
             segmentIndex = (segmentIndex - 0.01) % 1;
-            let pos = positionAroundCircle(center, radius, segmentIndex);
+            let er = effectiveRadiusForSegment(i + wiggleConstant, radius);
+            let pos = positionAroundCircle(center, er, segmentIndex);
             let a = (angleGivenIndex(segmentIndex) + Math.PI / 2) % (Math.PI * 2);
             segments.push(<WormSegment position={pos} angle={a} hue={hue} id='body' />);
             i++
         };
-        return segments.reverse()
+        return segments.reverse();
     };
 
     return (
         <div>
             {getSegments()}
+            <h1>wiggle constant: {wiggleConstant}</h1>
         </div>
     )
 
