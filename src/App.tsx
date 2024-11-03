@@ -7,10 +7,9 @@ import Worm from './WormSegment.tsx'
 TO-DO:
 - fix worm alignment (maybe done?)
 - make clock's position "relative" to size & center of greater webpage
-- add "wiggle" to worm
 - add blinking worm eyes
 - add cute little "squiggles" which appear & disappear
-- fix segments "overlapping in reverse"
+- add "ghost segments" aka worm tails "trail off"
 */
 
 function App() {
@@ -20,6 +19,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
 
   const center = { x: 400, y: 400 };
+  const wormLength = 20;
 
   const sRadius = 200;
   const [sIndex, setSIndex] = useState(0);
@@ -48,13 +48,23 @@ function App() {
     setHIndex(hours / 12);
   }
 
+  function makeWorm(index, radius) {
+    return <Worm
+      index={index}
+      center={center}
+      radius={radius}
+      wiggleConstant={wiggleConstant}
+      length={wormLength}
+    />
+  }
+
   return (
     <>
       <div>
         <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
-        <Worm index={sIndex} center={center} radius={sRadius} wiggleConstant={wiggleConstant} />
-        <Worm index={mIndex} center={center} radius={mRadius} wiggleConstant={wiggleConstant} />
-        <Worm index={hIndex} center={center} radius={hRadius} wiggleConstant={wiggleConstant} />
+        {makeWorm(sIndex, sRadius)}
+        {makeWorm(mIndex, mRadius)}
+        {makeWorm(hIndex, hRadius)}
         <div className='center' style={{ left: center.x, top: center.y }}></div>
       </div>
     </>

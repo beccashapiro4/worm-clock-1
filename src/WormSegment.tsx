@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import wormHead from './assets/Worm_Head.png'
 import './App.css'
 import './Worm.css'
+
+/*
+change this to TRUE to make worms wiggle
+ */
+const SHOULD_WIGGLE = false;
 
 function angleGivenIndex(i = 0) {
     return i * Math.PI * 2 - (Math.PI / 2);
 };
 
 function effectiveRadiusForSegment(segmentNumber, radius) {
+    if (!SHOULD_WIGGLE) {
+        return radius
+    }
+
     let positionInCycle = ((segmentNumber % 10) / 10) * Math.PI * 2;
     let amplitude = 6;
-    let offset = amplitude * Math.sin(positionInCycle);
+    let offset = amplitude * Math.cos(positionInCycle);
     return radius + offset;
 }
 
@@ -22,11 +29,11 @@ function positionAroundCircle(center, radius, i) {
 };
 
 function hueGivenRadius(radius = 100) {
-    if (radius == 200) {
+    if (radius == 200) { /* sec worm */
         return 120
-    } else if (radius == 250) {
+    } else if (radius == 250) { /* min worm */
         return 240
-    } else {
+    } else { /* hours worm */
         return 0
     };
 }
@@ -48,9 +55,8 @@ function WormSegment({ position, angle = 0, hue = 120, id = 'body' }) {
 /* 
 index is a number from 0-1 that maps to an angle around the circle
 */
-function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleConstant = 0 }) {
+function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleConstant = 0, length = 20 }) {
     const headAngle = angleGivenIndex(index);
-    const length = 40;
 
     function getSegments() {
         var i = 1;
@@ -59,13 +65,28 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleCons
         let headRadius = effectiveRadiusForSegment(wiggleConstant, radius);
         let headPosition = positionAroundCircle(center, headRadius, index);
         let hue = hueGivenRadius(radius);
-        segments.push(<WormSegment position={headPosition} angle={headAngle} hue={hue} id='head' />)
+        segments.push(
+            <WormSegment
+                position={headPosition}
+                angle={headAngle}
+                hue={hue}
+                id='head'
+            />
+        );
+
         while (i < length) {
             segmentIndex = (segmentIndex - 0.01) % 1;
             let er = effectiveRadiusForSegment(i + wiggleConstant, radius);
             let pos = positionAroundCircle(center, er, segmentIndex);
             let a = (angleGivenIndex(segmentIndex) + Math.PI / 2) % (Math.PI * 2);
-            segments.push(<WormSegment position={pos} angle={a} hue={hue} id='body' />);
+            segments.push(
+                <WormSegment
+                    position={pos}
+                    angle={a}
+                    hue={hue}
+                    id='body'
+                />
+            );
             i++
         };
         return segments.reverse();
