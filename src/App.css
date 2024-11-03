@@ -20,6 +20,7 @@
   width: 700px;
   height: 700px;
   border-radius: 50%;
+  border: 1px solid var(--bg-dark);
   position: fixed;
 }
 
