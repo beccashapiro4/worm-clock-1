@@ -44,7 +44,7 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100 }) {
         while (i < length) {
             segmentIndex = (segmentIndex - 0.01) % 1;
             let pos = positionAroundCircle(center, radius, segmentIndex);
-            let a = (angleGivenIndex(segmentIndex) + Math.PI / 2) % Math.PI * 2;
+            let a = (angleGivenIndex(segmentIndex) - Math.PI / 2) % (Math.PI * 2);
             segments.push(<WormSegment position={pos} angle={a} id='body' />);
             i++
         };
