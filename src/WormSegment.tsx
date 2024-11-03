@@ -4,7 +4,7 @@ import './App.css'
 import './Worm.css'
 
 function angleGivenIndex(i = 0) {
-    return i * Math.PI * 2;
+    return i * Math.PI * 2 - (Math.PI / 2);
 };
 
 function positionAroundCircle(center, radius, i) {
