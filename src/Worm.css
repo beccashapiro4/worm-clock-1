@@ -3,9 +3,19 @@
     color: rgb(219, 62, 149);
     background-image: url("./assets/Worm_Head.png");
     background-repeat: no-repeat;
-    background-size: 100px;
+    background-size: 40px;
     background-position: center;
-    background-color: blueviolet;
-    width: 100px;
-    height: 100px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
+
+#head {
+    background-image: url("./assets/Worm_Head.png");
+    z-index: 2;
+}
+
+#body {
+    background-image: url("./assets/Worm_Body.png");
+    background-size: 30px;
 }
