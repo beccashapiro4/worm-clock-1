@@ -1,25 +1,13 @@
 import { useState } from 'react'
 import './App.css'
-import './WormSegment'
-import WormSegment from './WormSegment.tsx'
+import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
-
-function CircularMotion(center, radius, i) {
-  const angle = i * Math.PI * 2;
-  const x: number = center.x + radius * Math.cos(angle);
-  const y: number = center.y + radius * Math.sin(angle);
-  return ({ x, y });
-}
 
 function App() {
   let t = setTimeout(updatetime, 100);
-  const [wormPosition, setWormPosition] = useState({ x: 200, y: 200 });
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-
-  const minutesInADay = 12 * 60;
-  const secondsInAnHour = 60 * 60;
 
   const center = { x: 700, y: 400 };
   const radius = 200;
@@ -34,27 +22,15 @@ function App() {
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
-    moveWormInACircle();
-  }
-
-  function moveWormInACircle() {
-    const newPosition = CircularMotion(center, radius, seconds / 60);
-    setWormPosition(newPosition);
-  }
-
-  function wormAngle() {
-    const angle = (seconds / 60) * Math.PI * 2;
-    return angle;
+    setIndex(seconds / 60);
   }
 
   return (
     <>
       <div>
-        <Worm headPosition={wormPosition} angle={wormAngle()} />
-        <div className='center' style={{ left: center.x, right: center.y }}></div>
-        <h1>hours: {hours}</h1>
-        <h1>minutes: {minutes}</h1>
-        <h1>seconds: {seconds}</h1>
+        <Worm index={index} center={center} radius={radius} />
+        <div className='center' style={{ left: center.x, top: center.y }}></div>
+        <h1>seconds: {seconds.toPrecision(2)}</h1>
       </div>
     </>
   )
