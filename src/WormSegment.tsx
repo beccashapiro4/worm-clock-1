@@ -38,13 +38,13 @@ function hueGivenRadius(radius = 100) {
     };
 }
 
-function WormSegment({ position, angle = 0, hue = 120, id = 'body' }) {
+function WormSegment({ position, angle = 0, hue = 120, saturation = 100, id = 'body' }) {
 
     const wormStyle = {
         left: position.x,
         top: position.y,
         rotate: angle.toString() + 'rad',
-        filter: 'hue-rotate(' + hue + 'deg)'
+        filter: 'hue-rotate(' + hue + 'deg) saturate(' + saturation + '%)'
     };
 
     return (
@@ -57,6 +57,15 @@ index is a number from 0-1 that maps to an angle around the circle
 */
 function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleConstant = 0, length = 20 }) {
     const headAngle = angleGivenIndex(index);
+
+    function saturationGivenSegmentNumber(segmentNumber) {
+        if (segmentNumber < length / 2) {
+            return 100;
+        } else {
+            let fadeFactor = (segmentNumber - length / 2) / (length / 2);
+            return (1 - fadeFactor) * 100;
+        }
+    }
 
     function getSegments() {
         var i = 1;
@@ -79,11 +88,13 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleCons
             let er = effectiveRadiusForSegment(i + wiggleConstant, radius);
             let pos = positionAroundCircle(center, er, segmentIndex);
             let a = (angleGivenIndex(segmentIndex) + Math.PI / 2) % (Math.PI * 2);
+            let sat = saturationGivenSegmentNumber(i);
             segments.push(
                 <WormSegment
                     position={pos}
                     angle={a}
                     hue={hue}
+                    saturation={sat}
                     id='body'
                 />
             );
@@ -95,7 +106,6 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleCons
     return (
         <div>
             {getSegments()}
-            <h1>wiggle constant: {wiggleConstant}</h1>
         </div>
     )
 

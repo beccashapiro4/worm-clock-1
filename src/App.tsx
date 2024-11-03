@@ -9,7 +9,6 @@ TO-DO:
 - make clock's position "relative" to size & center of greater webpage
 - add blinking worm eyes
 - add cute little "squiggles" which appear & disappear
-- add "ghost segments" aka worm tails "trail off"
 */
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
   const [seconds, setSeconds] = useState(0);
 
   const center = { x: 400, y: 400 };
-  const wormLength = 20;
+  const wormLength = 30;
 
   const sRadius = 200;
   const [sIndex, setSIndex] = useState(0);
