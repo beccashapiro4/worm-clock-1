@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  --bg-dark: rgb(44, 44, 48);
+  --bg-light: rgb(88, 87, 91);
 }
 
 .center {
@@ -14,7 +16,7 @@
 }
 
 .background-circle {
-  background-color: rgb(44, 44, 48);
+  background: radial-gradient(circle at center, var(--bg-light), var(--bg-dark), black);
   width: 700px;
   height: 700px;
   border-radius: 50%;
