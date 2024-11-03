@@ -7,5 +7,15 @@
     background-position: center;
     width: 40px;
     height: 40px;
-    position: fixed;
+    position: absolute;
+}
+
+#head {
+    background-image: url("./assets/Worm_Head.png");
+    z-index: 2;
+}
+
+#body {
+    background-image: url("./assets/Worm_Body.png");
+    background-size: 30px;
 }

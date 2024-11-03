@@ -35,10 +35,15 @@ function App() {
     setWormPosition(newPosition);
   }
 
+  function wormAngle() {
+    const angle = (seconds / 60) * Math.PI * 2;
+    return angle;
+  }
+
   return (
     <>
       <div>
-        <Worm headPosition={wormPosition} />
+        <Worm headPosition={wormPosition} angle={wormAngle()} />
         <div className='center' style={{ left: center.x, right: center.y }}></div>
         <h1>hours: {hours}</h1>
         <h1>minutes: {minutes}</h1>
