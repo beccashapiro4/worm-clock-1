@@ -9,8 +9,8 @@ function angleGivenIndex(i = 0) {
 
 function positionAroundCircle(center, radius, i) {
     const angle = angleGivenIndex(i);
-    const x: number = center.x + radius * Math.cos(angle);
-    const y: number = center.y + radius * Math.sin(angle);
+    const x: number = center.x - 20 + radius * Math.cos(angle);
+    const y: number = center.y - 20 + radius * Math.sin(angle);
     return ({ x, y });
 };
 

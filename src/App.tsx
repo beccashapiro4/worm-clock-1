@@ -40,7 +40,7 @@ function App() {
 
     setSIndex(seconds / 60);
     setMIndex(minutes / 60);
-    setHIndex(hours / 60);
+    setHIndex(hours / 12);
   }
 
   return (
