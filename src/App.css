@@ -7,12 +7,24 @@
   --bg-light: rgb(88, 87, 91);
 }
 
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
 .center {
   background-color: azure;
   width: 5px;
   height: 5px;
-  position: fixed;
   border-radius: 50%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 
 .background-circle {
@@ -21,7 +33,9 @@
   height: 700px;
   border-radius: 50%;
   border: 1px solid var(--bg-dark);
-  position: fixed;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .logo {

@@ -5,7 +5,6 @@
     background-position: center;
     width: 40px;
     height: 40px;
-    position: absolute;
     --blink-1: url("./assets/Blinking_Head/Blinking_Head-1.png");
     --blink-2: url("./assets/Blinking_Head/Blinking_Head-2.png");
     --blink-3: url("./assets/Blinking_Head/Blinking_Head-3.png");
@@ -15,6 +14,7 @@
     --blink-7: url("./assets/Blinking_Head/Blinking_Head-7.png");
     --blink-8: url("./assets/Blinking_Head/Blinking_Head-8.png");
     background-image: var(--blink-1), var(--blink-2), var(--blink-3), var(--blink-4), var(--blink-5), var(--blink-6), var(--blink-7), var(--blink-8);
+    position: absolute;
 }
 
 #head {

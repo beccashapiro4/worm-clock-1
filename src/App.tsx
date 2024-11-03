@@ -9,7 +9,6 @@ TO-DO:
 - make clock's position "relative" to size & center of greater webpage
 - add cute little "squiggles" which appear & disappear
 - add some sorta "foggy overlay" through which the squiggles are swimming
-- investigate/fix worm-blink animation glitch
 */
 
 function App() {
@@ -60,12 +59,13 @@ function App() {
 
   return (
     <>
-      <div>
-        <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
+      <div className='centered-content'>
+        <div className='background-circle'>
+          <div className='center'></div>
+        </div>
         {makeWorm(sIndex, sRadius)}
         {makeWorm(mIndex, mRadius)}
         {makeWorm(hIndex, hRadius)}
-        <div className='center' style={{ left: center.x, top: center.y }}></div>
       </div>
     </>
   )
