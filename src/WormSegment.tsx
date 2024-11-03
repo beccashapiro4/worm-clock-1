@@ -44,7 +44,8 @@ function WormSegment({ position, angle = 0, hue = 120, saturation = 100, id = 'b
         left: position.x,
         top: position.y,
         rotate: angle.toString() + 'rad',
-        filter: 'hue-rotate(' + hue + 'deg) saturate(' + saturation + '%)'
+        filter: 'hue-rotate(' + hue + 'deg) saturate(' + saturation + '%)',
+        opacity: saturation + '%'
     };
 
     return (
