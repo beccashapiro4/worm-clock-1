@@ -3,15 +3,30 @@ import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
 
+/*
+TO-DO:
+- fix worm alignment
+- make clock's position "relative" to size & center of greater webpage
+- add "wiggle" to worm
+- add blinking worm eyes
+*/
+
 function App() {
   let t = setTimeout(updatetime, 100);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const center = { x: 700, y: 400 };
-  const radius = 200;
-  const [index, setIndex] = useState(0);
+  const center = { x: 400, y: 400 };
+
+  const sRadius = 200;
+  const [sIndex, setSIndex] = useState(0);
+
+  const mRadius = 250;
+  const [mIndex, setMIndex] = useState(0);
+
+  const hRadius = 300;
+  const [hIndex, setHIndex] = useState(0);
 
   function updatetime() {
     const newDate = new Date();
@@ -22,15 +37,20 @@ function App() {
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
-    setIndex(seconds / 60);
+
+    setSIndex(seconds / 60);
+    setMIndex(minutes / 60);
+    setHIndex(hours / 60);
   }
 
   return (
     <>
       <div>
-        <Worm index={index} center={center} radius={radius} />
+        <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
+        <Worm index={sIndex} center={center} radius={sRadius} />
+        <Worm index={mIndex} center={center} radius={mRadius} />
+        <Worm index={hIndex} center={center} radius={hRadius} />
         <div className='center' style={{ left: center.x, top: center.y }}></div>
-        <h1>seconds: {seconds.toPrecision(2)}</h1>
       </div>
     </>
   )
