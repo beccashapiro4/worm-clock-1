@@ -1,5 +1,4 @@
 .Segment {
-    /*background-color: aquamarine;*/
     color: rgb(219, 62, 149);
     background-repeat: no-repeat;
     background-size: 40px;
@@ -33,15 +32,15 @@
         background-image: var(--blink-1);
     }
 
-    20% {
+    25% {
         background-image: var(--blink-2);
     }
 
-    25% {
+    28% {
         background-image: var(--blink-3);
     }
 
-    30% {
+    32% {
         background-image: var(--blink-4);
     }
 
