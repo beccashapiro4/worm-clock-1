@@ -17,8 +17,11 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const center = { x: 400, y: 400 };
-  const wormLength = 30;
+  let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+
+  const center = { x: vw / 2, y: vh / 2 };
+  const wormLength = 60;
 
   const sRadius = 200;
   const [sIndex, setSIndex] = useState(0);
@@ -59,9 +62,11 @@ function App() {
 
   return (
     <>
-      <div className='centered-content'>
-        <div className='background-circle'>
-          <div className='center'></div>
+      <div>
+        <div className='centered-content'>
+          <div className='background-circle'>
+            <div className='center'></div>
+          </div>
         </div>
         {makeWorm(sIndex, sRadius)}
         {makeWorm(mIndex, mRadius)}

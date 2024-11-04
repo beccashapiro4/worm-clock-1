@@ -21,10 +21,13 @@ function effectiveRadiusForSegment(segmentNumber, radius) {
     return radius + offset;
 }
 
+/*
+NOTE: the numbers -20 and 10 are very icky fixes
+*/
 function positionAroundCircle(center, radius, i) {
     const angle = angleGivenIndex(i);
     const x: number = center.x - 20 + radius * Math.cos(angle);
-    const y: number = center.y - 20 + radius * Math.sin(angle);
+    const y: number = center.y + 10 + radius * Math.sin(angle);
     return ({ x, y });
 };
 
