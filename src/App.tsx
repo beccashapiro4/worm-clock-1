@@ -5,10 +5,10 @@ import Worm from './WormSegment.tsx'
 
 /*
 TO-DO:
-- fix worm alignment (maybe done?)
-- make clock's position "relative" to size & center of greater webpage
-- add cute little "squiggles" which appear & disappear
-- add some sorta "foggy overlay" through which the squiggles are swimming
+- link to worm-clock on my website
+- embellishments: 
+- --> add cute little "squiggles" which appear & disappear
+- --> add some sorta "foggy overlay" through which the squiggles are swimming
 */
 
 function App() {
