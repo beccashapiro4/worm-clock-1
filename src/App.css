@@ -12,7 +12,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
 }
 
 .center {
@@ -29,8 +28,8 @@
 
 .background-circle {
   background: radial-gradient(circle at center, var(--bg-light), var(--bg-dark), black);
-  width: 700px;
-  height: 700px;
+  width: 80vmin;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid var(--bg-dark);
 }

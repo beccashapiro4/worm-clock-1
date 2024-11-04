@@ -19,17 +19,21 @@ function App() {
 
   let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  let vmin = Math.min(vw, vh);
 
   const center = { x: vw / 2, y: vh / 2 };
   const wormLength = 60;
 
-  const sRadius = 200;
+  const sRadius = vmin * 0.4 * 0.484;
+  const sHue = 120;
   const [sIndex, setSIndex] = useState(0);
 
-  const mRadius = 250;
+  const mRadius = vmin * 0.4 * 0.64;
+  const mHue = 240;
   const [mIndex, setMIndex] = useState(0);
 
-  const hRadius = 300;
+  const hRadius = vmin * 0.4 * 0.8;
+  const hHue = 0;
   const [hIndex, setHIndex] = useState(0);
 
   const [wiggleConstant, setWiggleConstant] = useState(0);
@@ -50,11 +54,12 @@ function App() {
     setHIndex(hours / 12);
   }
 
-  function makeWorm(index, radius) {
+  function makeWorm(index, radius, hue) {
     return <Worm
       index={index}
       center={center}
       radius={radius}
+      hue={hue}
       wiggleConstant={wiggleConstant}
       length={wormLength}
     />
@@ -64,13 +69,11 @@ function App() {
     <>
       <div>
         <div className='centered-content'>
-          <div className='background-circle'>
-            <div className='center'></div>
-          </div>
+          <div className='background-circle'></div>
         </div>
-        {makeWorm(sIndex, sRadius)}
-        {makeWorm(mIndex, mRadius)}
-        {makeWorm(hIndex, hRadius)}
+        {makeWorm(sIndex, sRadius, sHue)}
+        {makeWorm(mIndex, mRadius, mHue)}
+        {makeWorm(hIndex, hRadius, hHue)}
       </div>
     </>
   )
