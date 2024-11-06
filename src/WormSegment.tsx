@@ -21,22 +21,15 @@ function effectiveRadiusForSegment(segmentNumber, radius) {
     return radius + offset;
 }
 
+/*
+NOTE: the '-20' subtracts half the worm's width
+*/
 function positionAroundCircle(center, radius, i) {
     const angle = angleGivenIndex(i);
     const x: number = center.x - 20 + radius * Math.cos(angle);
     const y: number = center.y - 20 + radius * Math.sin(angle);
     return ({ x, y });
 };
-
-function hueGivenRadius(radius = 100) {
-    if (radius == 200) { /* sec worm */
-        return 120
-    } else if (radius == 250) { /* min worm */
-        return 240
-    } else { /* hours worm */
-        return 0
-    };
-}
 
 function WormSegment({ position, angle = 0, hue = 120, saturation = 100, id = 'body' }) {
 
@@ -56,7 +49,7 @@ function WormSegment({ position, angle = 0, hue = 120, saturation = 100, id = 'b
 /* 
 index is a number from 0-1 that maps to an angle around the circle
 */
-function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleConstant = 0, length = 20 }) {
+function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, hue = 0, wiggleConstant = 0, length = 20 }) {
     const headAngle = angleGivenIndex(index);
 
     function saturationGivenSegmentNumber(segmentNumber) {
@@ -74,7 +67,6 @@ function Worm({ index = 0, center = { x: 200, y: 200 }, radius = 100, wiggleCons
         var segmentIndex = index
         let headRadius = effectiveRadiusForSegment(wiggleConstant, radius);
         let headPosition = positionAroundCircle(center, headRadius, index);
-        let hue = hueGivenRadius(radius);
         segments.push(
             <WormSegment
                 position={headPosition}

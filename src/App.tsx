@@ -5,11 +5,10 @@ import Worm from './WormSegment.tsx'
 
 /*
 TO-DO:
-- fix worm alignment (maybe done?)
-- make clock's position "relative" to size & center of greater webpage
-- add cute little "squiggles" which appear & disappear
-- add some sorta "foggy overlay" through which the squiggles are swimming
-- investigate/fix worm-blink animation glitch
+- link to worm-clock on my website
+- embellishments: 
+- --> add cute little "squiggles" which appear & disappear
+- --> add some sorta "foggy overlay" through which the squiggles are swimming
 */
 
 function App() {
@@ -18,16 +17,23 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const center = { x: 400, y: 400 };
-  const wormLength = 30;
+  let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  let vmin = Math.min(vw, vh);
 
-  const sRadius = 200;
+  const center = { x: vw / 2, y: vh / 2 };
+  const wormLength = 60;
+
+  const sRadius = vmin * 0.4 * 0.484;
+  const sHue = 120;
   const [sIndex, setSIndex] = useState(0);
 
-  const mRadius = 250;
+  const mRadius = vmin * 0.4 * 0.64;
+  const mHue = 240;
   const [mIndex, setMIndex] = useState(0);
 
-  const hRadius = 300;
+  const hRadius = vmin * 0.4 * 0.8;
+  const hHue = 0;
   const [hIndex, setHIndex] = useState(0);
 
   const [wiggleConstant, setWiggleConstant] = useState(0);
@@ -48,11 +54,12 @@ function App() {
     setHIndex(hours / 12);
   }
 
-  function makeWorm(index, radius) {
+  function makeWorm(index, radius, hue) {
     return <Worm
       index={index}
       center={center}
       radius={radius}
+      hue={hue}
       wiggleConstant={wiggleConstant}
       length={wormLength}
     />
@@ -61,11 +68,12 @@ function App() {
   return (
     <>
       <div>
-        <div className='background-circle' style={{ left: center.x - 350, top: center.y - 350 }} />
-        {makeWorm(sIndex, sRadius)}
-        {makeWorm(mIndex, mRadius)}
-        {makeWorm(hIndex, hRadius)}
-        <div className='center' style={{ left: center.x, top: center.y }}></div>
+        <div className='centered-content'>
+          <div className='background-circle'></div>
+        </div>
+        {makeWorm(sIndex, sRadius, sHue)}
+        {makeWorm(mIndex, mRadius, mHue)}
+        {makeWorm(hIndex, hRadius, hHue)}
       </div>
     </>
   )
