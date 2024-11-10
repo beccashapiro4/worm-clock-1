@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/beccafis/worm-time
+    - export DEPLOYPATH=/home2/beccafis/worm-time
     - /bin/cp -R * $DEPLOYPATH
