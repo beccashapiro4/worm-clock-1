@@ -7,3 +7,8 @@
     RewriteCond %{REQUEST_FILENAME} !-l
     RewriteRule . /index.html [L]
 </IfModule>
+
+<IfModule mod_mime.m>
+    AddType text/javascript .tsx .js
+    AddType application/json json
+</IfModule>
