@@ -12,6 +12,5 @@ function testOnly() {
 };
 
 createRoot(document.getElementById('root')!).render(
-  testOnly()
-  //<App />,
+  <App />,
 )
