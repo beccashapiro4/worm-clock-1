@@ -2,10 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
+import WormJumping from './WormJump.tsx'
 
 /*
 TO-DO:
-- link to worm-clock on my website
 - embellishments: 
 - --> add cute little "squiggles" which appear & disappear
 - --> add some sorta "foggy overlay" through which the squiggles are swimming
@@ -63,6 +63,13 @@ function App() {
       wiggleConstant={wiggleConstant}
       length={wormLength}
     />
+  }
+
+  /* NOTE: this doesn't work bc of the way gifs loop */
+  function makeJumpingWorms() {
+    if (seconds % 30 < 10) {
+      return <WormJumping angle={(seconds % 3) * 30} flip={false} />
+    }
   }
 
   return (
