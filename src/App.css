@@ -5,6 +5,7 @@
   text-align: center;
   --bg-dark: rgb(44, 44, 48);
   --bg-light: rgb(88, 87, 91);
+  --bg-BACK: rgb(36, 36, 36);
 }
 
 .centered-content {
