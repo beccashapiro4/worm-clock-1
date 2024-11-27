@@ -72,14 +72,18 @@ function App() {
 
   function animationState() {
     if (playState) {
-      return ('100%')
+      return ('running')
     } else {
-      return ('25%')
+      return ('pause')
     }
   };
 
   const bulbStyle = {
-    opacity: animationState()
+    animationPlayState: playState ? 'running' : 'paused'
+  };
+
+  const buttonStyle = {
+    opacity: playState ? '100%' : '25%'
   };
 
   return (
@@ -88,8 +92,8 @@ function App() {
         <div className='centered-content'>
           <div className='background-circle'></div>
         </div>
-        <div className='Bulb' />
-        <div className='press-play' style={bulbStyle} onClick={() => setPlayState(!playState)} />
+        <div className='Bulb' style={bulbStyle} />
+        <div className='press-play' style={buttonStyle} onClick={() => setPlayState(!playState)} />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}
