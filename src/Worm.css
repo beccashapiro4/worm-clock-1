@@ -1,19 +1,21 @@
 .Segment {
     color: rgb(219, 62, 149);
     background-repeat: no-repeat;
-    background-size: 40px;
-    background-position: center;
-    width: 40px;
-    height: 40px;
-    --blink-1: url("./assets/Blinking_Head/Blinking_Head-1.png");
-    --blink-2: url("./assets/Blinking_Head/Blinking_Head-2.png");
-    --blink-3: url("./assets/Blinking_Head/Blinking_Head-3.png");
-    --blink-4: url("./assets/Blinking_Head/Blinking_Head-4.png");
-    --blink-5: url("./assets/Blinking_Head/Blinking_Head-5.png");
-    --blink-6: url("./assets/Blinking_Head/Blinking_Head-6.png");
-    --blink-7: url("./assets/Blinking_Head/Blinking_Head-7.png");
-    --blink-8: url("./assets/Blinking_Head/Blinking_Head-8.png");
-    background-image: var(--blink-1), var(--blink-2), var(--blink-3), var(--blink-4), var(--blink-5), var(--blink-6), var(--blink-7), var(--blink-8);
+    /* background-size: 40px;*/
+    background-position: left;
+    width: 660px;
+    height: 660px;
+    scale: calc(40/660);
+    --blink-sprite: url("./assets/blinking-head-sprite.png");
+    --blink-1: 0px;
+    --blink-2: -670px;
+    --blink-3: -1340px;
+    --blink-4: -2010px;
+    --blink-5: -2680px;
+    --blink-6: -3350px;
+    --blink-7: -4020px;
+    --blink-8: -4690px;
+    background-image: var(--blink-sprite);
     position: absolute;
 }
 
@@ -46,62 +48,62 @@
 @keyframes blink {
 
     0% {
-        background-image: var(--blink-1);
+        background-position-x: var(--blink-1);
     }
 
     20% {
-        background-image: var(--blink-2);
+        background-position-x: var(--blink-2);
     }
 
     25% {
-        background-image: var(--blink-3);
+        background-position-x: var(--blink-3);
     }
 
     30% {
-        background-image: var(--blink-4);
+        background-position-x: var(--blink-4);
     }
 
     35% {
-        background-image: var(--blink-5);
+        background-position-x: var(--blink-5);
     }
 
     38% {
-        background-image: var(--blink-6);
+        background-position-x: var(--blink-6);
     }
 
     42% {
-        background-image: var(--blink-7);
+        background-position-x: var(--blink-7);
     }
 
     45% {
-        background-image: var(--blink-8);
+        background-position-x: var(--blink-8);
     }
 
     50% {
-        background-image: var(--blink-7);
+        background-position-x: var(--blink-7);
     }
 
     52% {
-        background-image: var(--blink-6);
+        background-position-x: var(--blink-6);
     }
 
     54% {
-        background-image: var(--blink-5);
+        background-position-x: var(--blink-5);
     }
 
     58% {
-        background-image: var(--blink-4);
+        background-position-x: var(--blink-4);
     }
 
     62% {
-        background-image: var(--blink-3);
+        background-position-x: var(--blink-3);
     }
 
     65% {
-        background-image: var(--blink-2);
+        background-position-x: var(--blink-2);
     }
 
     100% {
-        background-image: var(--blink-1);
+        background-position-x: var(--blink-1);
     }
 }
