@@ -11,8 +11,9 @@
     position: absolute;
     left: calc(50% - var(--r));
     top: calc(50% - var(--r));
-    box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
-    animation: flash 10s linear infinite;
+    /*box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);*/
+    animation-iteration-count: 10;
+    animation: single-flash 10s linear;
 }
 
 @keyframes swing {
@@ -26,6 +27,72 @@
 
     100% {
         transform: rotate(15deg);
+    }
+}
+
+@keyframes single-flash {
+    0% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    1% {
+        background: rgba(255, 235, 0, 1);
+        box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
+    }
+
+    1.001% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    10% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    11.001% {
+        background: rgba(255, 235, 0, 1);
+        box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
+    }
+
+    11.002% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    12% {
+        background: rgba(255, 235, 0, 1);
+        box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
+    }
+
+    /*    */
+    39.999% {
+        background: rgba(255, 235, 0, 1);
+        box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
+    }
+
+    40% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    41% {
+        background: rgba(255, 235, 0, 1);
+        box-shadow: 0px 0px 150px 75px rgba(245, 223, 77, 1);
+    }
+
+    41.001% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }
+
+    /*    */
+
+    75%,
+    100% {
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
     }
 }
 
