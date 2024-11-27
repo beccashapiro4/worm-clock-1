@@ -3,6 +3,7 @@ import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
 import WormJumping from './WormJump.tsx'
+import './Lightbulb.css'
 
 /*
 TO-DO:
@@ -78,6 +79,7 @@ function App() {
         <div className='centered-content'>
           <div className='background-circle'></div>
         </div>
+        <div className='Bulb' />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}
