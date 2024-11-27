@@ -15,18 +15,6 @@
   text-align: center;
 }
 
-.center {
-  background-color: var(--bg-light);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-}
-
 .background-circle {
   background: radial-gradient(circle at center, var(--bg-light), var(--bg-dark), black);
   width: 80vmin;
@@ -35,10 +23,18 @@
   border: 1px solid var(--bg-dark);
 }
 
-.card {
-  padding: 2em;
+.press-play {
+  --r: 3vmin;
+  width: calc(var(--r)*2);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid darkolivegreen;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: rgba(90, 100, 84, 0.749);
 }
 
-.read-the-docs {
-  color: #888;
+.card {
+  padding: 2em;
 }

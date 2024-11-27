@@ -1,5 +1,4 @@
 .Segment {
-    color: rgb(219, 62, 149);
     background-repeat: no-repeat;
     background-size: 40px;
     background-position: center;
@@ -19,7 +18,7 @@
 
 #head {
     z-index: 2;
-    animation: blink 2s infinite;
+    animation: blink 2s infinite forwards;
 }
 
 #body {

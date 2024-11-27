@@ -66,12 +66,21 @@ function App() {
     />
   }
 
-  /* NOTE: this doesn't work bc of the way gifs loop */
-  function makeJumpingWorms() {
-    if (seconds % 30 < 10) {
-      return <WormJumping angle={(seconds % 3) * 30} flip={false} />
+  /* LIGHTBUBL */
+
+  const [playState, setPlayState] = useState(false);
+
+  function animationState() {
+    if (playState) {
+      return ('100%')
+    } else {
+      return ('25%')
     }
-  }
+  };
+
+  const bulbStyle = {
+    opacity: animationState()
+  };
 
   return (
     <>
@@ -80,6 +89,7 @@ function App() {
           <div className='background-circle'></div>
         </div>
         <div className='Bulb' />
+        <div className='press-play' style={bulbStyle} onClick={() => setPlayState(!playState)} />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}
