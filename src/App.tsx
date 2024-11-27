@@ -70,14 +70,6 @@ function App() {
 
   const [playState, setPlayState] = useState(false);
 
-  function animationState() {
-    if (playState) {
-      return ('running')
-    } else {
-      return ('pause')
-    }
-  };
-
   const bulbStyle = {
     animationPlayState: playState ? 'running' : 'paused'
   };
