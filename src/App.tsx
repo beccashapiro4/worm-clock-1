@@ -2,15 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
-import WormJumping from './WormJump.tsx'
 import './Lightbulb.css'
-
-/*
-TO-DO:
-- embellishments: 
-- --> add cute little "squiggles" which appear & disappear
-- --> add some sorta "foggy overlay" through which the squiggles are swimming
-*/
 
 function App() {
   let t = setTimeout(updatetime, 100);
@@ -72,7 +64,6 @@ function App() {
     return i % 2 == 0
   }
 
-  const [playState, setPlayState] = useState(false);
   const [iterationState, setIterationState] = useState(0);
 
   const bulbStyle = {
