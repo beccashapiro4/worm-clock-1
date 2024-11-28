@@ -68,14 +68,20 @@ function App() {
 
   /* LIGHTBUBL */
 
+  function isEven(i: number) {
+    return i % 2 == 0
+  }
+
   const [playState, setPlayState] = useState(false);
+  const [iterationState, setIterationState] = useState(0);
 
   const bulbStyle = {
-    animationPlayState: playState ? 'running' : 'paused'
+    animationName: isEven(iterationState) ? 'flash-1' : 'flash-2',
+    animationIterationCount: iterationState + 1
   };
 
   const buttonStyle = {
-    opacity: playState ? '100%' : '25%'
+    opacity: isEven(iterationState) ? '100%' : '25%'
   };
 
   return (
@@ -85,7 +91,7 @@ function App() {
           <div className='background-circle'></div>
         </div>
         <div className='Bulb' style={bulbStyle} />
-        <div className='press-play' style={buttonStyle} onClick={() => setPlayState(!playState)} />
+        <div className='press-play' style={buttonStyle} onClick={() => setIterationState((iterationState + 1) % 4)} />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}
