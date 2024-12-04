@@ -33,10 +33,22 @@ function App() {
 
   function updatetime() {
     const newDate = new Date();
-    const h = newDate.getHours() % 12
-    const m = newDate.getMinutes()
-    const s = newDate.getSeconds()
-    const ms = newDate.getMilliseconds()
+    var h = newDate.getHours() % 12
+    var m = newDate.getMinutes()
+    var s = newDate.getSeconds()
+    var ms = newDate.getMilliseconds()
+
+    if (isPaused) {
+      if ((newDate.getTime() / 1000) - (datePaused.getTime() / 1000) > (feauxTime * 4.5)) {
+        playDate();
+      } else {
+        h = feauxTime;
+        m -= datePaused.getMinutes();
+        s -= datePaused.getSeconds();
+        ms -= datePaused.getMilliseconds();
+      }
+    }
+
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
@@ -48,9 +60,9 @@ function App() {
 
     if (m == 0 && s == 0) {
       /* trigger animation on the hour */
-      setIterationState((iterationState + 1) % 2)
-    }
-  }
+      lightUp();
+    };
+  };
 
   function makeWorm(index, radius, hue) {
     return <Worm
@@ -83,6 +95,10 @@ function App() {
     };
   };
 
+  function lightUp() {
+    setIterationState((iterationState + 1) % 2)
+  }
+
   const [iterationState, setIterationState] = useState(-1);
 
   const bulbStyle = {
@@ -90,8 +106,25 @@ function App() {
     animationIterationCount: Math.floor(hours) == 0 ? 12 : Math.floor(hours)
   };
 
+  /* PLAY/PAUSE BUTTON */
+
+  const [datePaused, setDatePaused] = useState(new Date());
+  const [isPaused, setIsPaused] = useState(false);
+  const [feauxTime, setFeauxTime] = useState(0);
+  const BUTTON_IS_VISIBLE = false;
+
+  function pauseDate(time: number) {
+    setFeauxTime(time);
+    setDatePaused(new Date());
+    setIsPaused(true)
+  }
+
+  function playDate() {
+    setIsPaused(false)
+  }
+
   const buttonStyle = {
-    opacity: isEven(iterationState) ? '100%' : '25%'
+    opacity: BUTTON_IS_VISIBLE ? (!isPaused ? '100%' : '25%') : '0%'
   };
 
   return (
@@ -100,8 +133,8 @@ function App() {
         <div className='centered-content'>
           <div className='background-circle'></div>
         </div>
-        <div className='Bulb' style={bulbStyle} />
-        <div className='press-play' style={buttonStyle} onClick={() => setIterationState((iterationState + 1) % 4)} />
+        <div className='Bulb' style={bulbStyle} onClick={lightUp} />
+        <div className='press-play' style={buttonStyle} onClick={() => pauseDate(5)} />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}

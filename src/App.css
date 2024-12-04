@@ -33,6 +33,7 @@
   right: 10px;
   top: 10px;
   background: rgba(90, 100, 84, 0.749);
+  cursor: pointer;
 }
 
 .card {
