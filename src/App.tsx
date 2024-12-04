@@ -45,6 +45,11 @@ function App() {
     setSIndex(seconds / 60);
     setMIndex(minutes / 60);
     setHIndex(hours / 12);
+
+    if (m == 0 && s == 0) {
+      /* trigger animation on the hour */
+      setIterationState((iterationState + 1) % 2)
+    }
   }
 
   function makeWorm(index, radius, hue) {
@@ -64,11 +69,25 @@ function App() {
     return i % 2 == 0
   }
 
-  const [iterationState, setIterationState] = useState(0);
+  /* unused for now, but likely a more elegant way to trigger animation */
+  enum animationState {
+    "flash-1" = 0,
+    "flash-2" = 1
+  }
+
+  function animationName() {
+    if (iterationState < 0) {
+      return null /* prevents arbitrary animation on initial launch */
+    } else {
+      return isEven(iterationState) ? 'flash-1' : 'flash-2';
+    };
+  };
+
+  const [iterationState, setIterationState] = useState(-1);
 
   const bulbStyle = {
-    animationName: isEven(iterationState) ? 'flash-1' : 'flash-2',
-    animationIterationCount: iterationState + 1
+    animationName: animationName(),
+    animationIterationCount: Math.floor(hours) == 0 ? 12 : Math.floor(hours)
   };
 
   const buttonStyle = {
