@@ -2,14 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import './WormSegment.tsx'
 import Worm from './WormSegment.tsx'
-import WormJumping from './WormJump.tsx'
-
-/*
-TO-DO:
-- embellishments: 
-- --> add cute little "squiggles" which appear & disappear
-- --> add some sorta "foggy overlay" through which the squiggles are swimming
-*/
+import './Lightbulb.css'
 
 function App() {
   let t = setTimeout(updatetime, 100);
@@ -40,10 +33,22 @@ function App() {
 
   function updatetime() {
     const newDate = new Date();
-    const h = newDate.getHours() % 12
-    const m = newDate.getMinutes()
-    const s = newDate.getSeconds()
-    const ms = newDate.getMilliseconds()
+    var h = newDate.getHours() % 12
+    var m = newDate.getMinutes()
+    var s = newDate.getSeconds()
+    var ms = newDate.getMilliseconds()
+
+    if (isPaused) {
+      if ((newDate.getTime() / 1000) - (datePaused.getTime() / 1000) > (feauxTime * 4.5)) {
+        playDate();
+      } else {
+        h = feauxTime;
+        m -= datePaused.getMinutes();
+        s -= datePaused.getSeconds();
+        ms -= datePaused.getMilliseconds();
+      }
+    }
+
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
@@ -52,7 +57,12 @@ function App() {
     setSIndex(seconds / 60);
     setMIndex(minutes / 60);
     setHIndex(hours / 12);
-  }
+
+    if (m == 0 && s == 0) {
+      /* trigger animation on the hour */
+      lightUp();
+    };
+  };
 
   function makeWorm(index, radius, hue) {
     return <Worm
@@ -65,12 +75,57 @@ function App() {
     />
   }
 
-  /* NOTE: this doesn't work bc of the way gifs loop */
-  function makeJumpingWorms() {
-    if (seconds % 30 < 10) {
-      return <WormJumping angle={(seconds % 3) * 30} flip={false} />
-    }
+  /* LIGHTBUBL */
+
+  function isEven(i: number) {
+    return i % 2 == 0
   }
+
+  /* unused for now, but likely a more elegant way to trigger animation */
+  enum animationState {
+    "flash-1" = 0,
+    "flash-2" = 1
+  }
+
+  function animationName() {
+    if (iterationState < 0) {
+      return null /* prevents arbitrary animation on initial launch */
+    } else {
+      return isEven(iterationState) ? 'flash-1' : 'flash-2';
+    };
+  };
+
+  function lightUp() {
+    setIterationState((iterationState + 1) % 2)
+  }
+
+  const [iterationState, setIterationState] = useState(-1);
+
+  const bulbStyle = {
+    animationName: animationName(),
+    animationIterationCount: Math.floor(hours) == 0 ? 12 : Math.floor(hours)
+  };
+
+  /* PLAY/PAUSE BUTTON */
+
+  const [datePaused, setDatePaused] = useState(new Date());
+  const [isPaused, setIsPaused] = useState(false);
+  const [feauxTime, setFeauxTime] = useState(0);
+  const BUTTON_IS_VISIBLE = false;
+
+  function pauseDate(time: number) {
+    setFeauxTime(time);
+    setDatePaused(new Date());
+    setIsPaused(true)
+  }
+
+  function playDate() {
+    setIsPaused(false)
+  }
+
+  const buttonStyle = {
+    opacity: BUTTON_IS_VISIBLE ? (!isPaused ? '100%' : '25%') : '0%'
+  };
 
   return (
     <>
@@ -78,6 +133,8 @@ function App() {
         <div className='centered-content'>
           <div className='background-circle'></div>
         </div>
+        <div className='Bulb' style={bulbStyle} onClick={lightUp} />
+        <div className='press-play' style={buttonStyle} onClick={() => pauseDate(5)} />
         {makeWorm(sIndex, sRadius, sHue)}
         {makeWorm(mIndex, mRadius, mHue)}
         {makeWorm(hIndex, hRadius, hHue)}
