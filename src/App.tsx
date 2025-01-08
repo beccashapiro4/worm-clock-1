@@ -29,8 +29,6 @@ function App() {
   const hHue = 0;
   const [hIndex, setHIndex] = useState(0);
 
-  const [wiggleConstant, setWiggleConstant] = useState(0);
-
   function updatetime() {
     const newDate = new Date();
     var h = newDate.getHours() % 12
@@ -38,21 +36,9 @@ function App() {
     var s = newDate.getSeconds()
     var ms = newDate.getMilliseconds()
 
-    if (isPaused) {
-      if ((newDate.getTime() / 1000) - (datePaused.getTime() / 1000) > (feauxTime * 4.5)) {
-        playDate();
-      } else {
-        h = feauxTime;
-        m -= datePaused.getMinutes();
-        s -= datePaused.getSeconds();
-        ms -= datePaused.getMilliseconds();
-      }
-    }
-
     setHours(h + m / 60);
     setMinutes(m + s / 60);
     setSeconds(s + ms / 1000);
-    setWiggleConstant((wiggleConstant + 1) % 40);
 
     setSIndex(seconds / 60);
     setMIndex(minutes / 60);
@@ -106,7 +92,7 @@ function App() {
     animationIterationCount: Math.floor(hours) == 0 ? 12 : Math.floor(hours)
   };
 
-  /* PLAY/PAUSE BUTTON */
+  /* PLAY/PAUSE BUTTON (currently unused) */
 
   const [datePaused, setDatePaused] = useState(new Date());
   const [isPaused, setIsPaused] = useState(false);
@@ -121,6 +107,20 @@ function App() {
 
   function playDate() {
     setIsPaused(false)
+  }
+
+  /* this logic goes in the update function if we ever use pause/play */
+  function updateIfPaused(newDate: Date, h: number, m: number, s: number, ms: number) {
+    if (isPaused) {
+      if ((newDate.getTime() / 1000) - (datePaused.getTime() / 1000) > (feauxTime * 4.5)) {
+        playDate();
+      } else {
+        h = feauxTime;
+        m -= datePaused.getMinutes();
+        s -= datePaused.getSeconds();
+        ms -= datePaused.getMilliseconds();
+      }
+    }
   }
 
   const buttonStyle = {
