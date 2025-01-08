@@ -56,7 +56,6 @@ function App() {
       center={center}
       radius={radius}
       hue={hue}
-      wiggleConstant={wiggleConstant}
       length={wormLength}
     />
   }
@@ -100,6 +99,10 @@ function App() {
   const BUTTON_IS_VISIBLE = false;
 
   function pauseDate(time: number) {
+    if (!BUTTON_IS_VISIBLE) {
+      return;
+    };
+
     setFeauxTime(time);
     setDatePaused(new Date());
     setIsPaused(true)
